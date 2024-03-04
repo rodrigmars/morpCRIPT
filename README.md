@@ -32,7 +32,7 @@ Windows PowerShell
 pip install -r requirements.txt
 ```
 ## Atualizando requirements
-> Obs: Mantenha o aquivo *Requirements.txt* atualizado sempre que uma biblioteca for adicionada ou removida do projeto.
+> Obs: Mantenha o aquivo *requirements.txt* atualizado sempre que uma biblioteca for adicionada ou removida do projeto. Este projeto adota o método *pip freeze* para a listagem de dependências.
 ```powershell
-upgrade-requirements
+pip freeze > requirements.txt
 ```
