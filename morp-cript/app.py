@@ -1,6 +1,6 @@
 def main():
 
-    def pick_up_words(frase):
+    def text_mining(frase):
 
         vowels = ['a', 'e', 'i', 'o', 'u']
 
@@ -21,7 +21,7 @@ def main():
 
                 words[i] = w
 
-            def get_occurrences():
+            def get_occurrences(filter_type: int):
 
                 def count_words(unique_word):
 
@@ -41,27 +41,37 @@ def main():
 
                 occurrences = list(map(count_words, set(words.values())))
 
-                result = {}
+                result = []
 
                 for score in occurrences:
 
                     for k, v in score.items():
-                        result[v[0]] = k, v[1]
+                        result.append({"id": v[0],
+                                       "word": k,
+                                       "total": v[1]})
 
-                return sorted(result.items())
+                def filter_occurrence(key: str):
+                    return sorted(result, key=lambda x: x[key].lower())
+
+                match (filter_type):
+                    case 1:
+                        return filter_occurrence("id")
+                    case 2:
+                        return filter_occurrence("word")
+                    case _:
+                        return filter_occurrence("total")
 
             return get_occurrences
 
         return create_bag
 
     # frase = "Cedo ou tarde.de manhã,,,você.vai aprender, assim como eu aprendi, que há uma diferença entre conhecer o caminho e percorrer o caminho"
-    frase = "areia areia areia no no olho do do do do furacão Em meio milhões"
+    # frase = "areia areia areia no no olho do do do do furacão Em meio milhões"
+    frase = "c d f A A e b B i o u h t v z A f x h A"
 
-    print(frase)
+    for occurrences in text_mining(frase)()(2):
 
-    for _, v in pick_up_words(frase)()():
-
-        print(f"{v[0]} : {v[1]}")
+        print(f"{occurrences['word']}: {occurrences['total']}")
 
 
 if __name__ == "__main__":
