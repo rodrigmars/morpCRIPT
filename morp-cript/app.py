@@ -12,44 +12,56 @@ def main():
 
         def create_bag():
 
-            words = []
+            words = {}
 
-            for w in frase.split():
+            for i, w in enumerate(frase.split()):
 
                 # if w in vowels:
                 #     continue
 
-                words.append(w)
+                words[i] = w
 
-            def Counter():
+            def get_occurrences():
 
                 def count_words(unique_word):
 
-                    words_dict = {}
                     count = 0
 
-                    for w in words:
+                    words_dict = {}
 
-                        if unique_word.lower() == w.lower():
+                    for k, v in words.items():
+
+                        if unique_word.lower() == v.lower():
 
                             count += 1
-                            words_dict[unique_word] = count
+
+                            words_dict[v] = k, count
 
                     return words_dict
 
-                return list(map(count_words, set(words)))
+                occurrences = list(map(count_words, set(words.values())))
 
-            return Counter
+                result = {}
+
+                for score in occurrences:
+
+                    for k, v in score.items():
+                        result[v[0]] = k, v[1]
+
+                return sorted(result.items())
+
+            return get_occurrences
 
         return create_bag
 
     # frase = "Cedo ou tarde.de manhã,,,você.vai aprender, assim como eu aprendi, que há uma diferença entre conhecer o caminho e percorrer o caminho"
     frase = "areia areia areia no no olho do do do do furacão Em meio milhões"
 
-    words = pick_up_words(frase)()()
+    print(frase)
 
-    for w in words:
-        print(w)
+    for _, v in pick_up_words(frase)()():
+
+        print(f"{v[0]} : {v[1]}")
 
 
 if __name__ == "__main__":
