@@ -50,16 +50,11 @@ def main():
                                        "word": k,
                                        "total": v[1]})
 
-                def filter_occurrence(key: str, reverse: bool):
-                    return sorted(result, key=lambda x: x[key], reverse=reverse)
+                def filter_occurrence(args):
+                    return sorted(result, key=lambda x: x[args[0]], reverse=args[1])
 
-                match (filter_type):
-                    case 1:
-                        return filter_occurrence("id", False)
-                    case 2:
-                        return filter_occurrence("word", False)
-                    case _:
-                        return filter_occurrence("total", True)
+                return filter_occurrence(("word", False) if filter_type == 1
+                                         else ("total", True))
 
             return get_occurrences
 
@@ -69,7 +64,7 @@ def main():
     # frase = "areia areia areia no no olho do do do do furacão Em meio milhões"
     frase = "c d f A A e b B i o u h t v z A f x h A"
 
-    for occurrences in text_mining(frase)()(1):
+    for occurrences in text_mining(frase)()(2):
 
         print(f"{occurrences['word']}: {occurrences['total']}")
 
