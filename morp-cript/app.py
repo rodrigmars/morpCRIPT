@@ -64,9 +64,15 @@ def main():
     # frase = "areia areia areia no no olho do do do do furacão Em meio milhões"
     frase = "c d f A A e b B i o u h t v z A f x h A"
 
-    for occurrences in text_mining(frase)()(2):
+    try:
 
-        print(f"{occurrences['word']}: {occurrences['total']}")
+        for occurrences in text_mining(frase)()(2):
+
+            print(f"{occurrences['word']}: {occurrences['total']}")
+
+    except Exception as ex:
+
+        print("Error text_mining:", ex)
 
 
 if __name__ == "__main__":
