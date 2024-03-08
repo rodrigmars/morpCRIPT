@@ -21,7 +21,7 @@ def main():
 
                 words[i] = w
 
-            def get_occurrences(filter_type: int):
+            def get_occurrences():
 
                 def count_words(unique_word):
 
@@ -50,23 +50,23 @@ def main():
                                        "word": k,
                                        "total": v[1]})
 
-                def filter_occurrence(args):
-                    return sorted(result, key=lambda x: x[args[0]], reverse=args[1])
-
-                return filter_occurrence(("word", False) if filter_type == 1
-                                         else ("total", True))
+                return sorted(result,
+                              key=lambda x: x["total"],
+                              reverse=True)
 
             return get_occurrences
 
         return create_bag
 
-    # frase = "Cedo ou tarde.de manhã,,,você.vai aprender, assim como eu aprendi, que há uma diferença entre conhecer o caminho e percorrer o caminho"
+    frase = "Cedo ou tarde.de manhã,,,você.vai aprender, assim como eu aprendi, que há uma diferença entre conhecer o caminho e percorrer o caminho"
+
     # frase = "areia areia areia no no olho do do do do furacão Em meio milhões"
-    frase = "c d f A A e b B i o u h t v z A f x h A"
+
+    # frase = "c d f A A e b B i o u h t v z A f x h A"
 
     try:
 
-        for occurrences in text_mining(frase)()(2):
+        for occurrences in text_mining(frase)()():
 
             print(f"{occurrences['word']}: {occurrences['total']}")
 
