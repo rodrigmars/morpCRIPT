@@ -12,14 +12,14 @@ def main():
 
         def create_bag():
 
-            words = {}
+            words = []
 
-            for i, w in enumerate(frase.split()):
+            for w in frase.split():
 
                 # if w in vowels:
                 #     continue
 
-                words[i] = w
+                words.append(w)
 
             def get_occurrences():
 
@@ -29,26 +29,25 @@ def main():
 
                     words_dict = {}
 
-                    for k, v in words.items():
+                    for w in words:
 
-                        if unique_word.lower() == v.lower():
+                        if unique_word.lower() == w.lower():
 
                             count += 1
 
-                            words_dict[v] = k, count
+                            words_dict[w] = count
 
                     return words_dict
 
-                occurrences = list(map(count_words, set(words.values())))
+                occurrences = list(map(count_words, set(words)))
 
                 result = []
 
                 for score in occurrences:
 
                     for k, v in score.items():
-                        result.append({"id": v[0],
-                                       "word": k,
-                                       "total": v[1]})
+                        result.append({"word": k,
+                                       "total": v})
 
                 return sorted(result,
                               key=lambda x: x["total"],
@@ -58,11 +57,14 @@ def main():
 
         return create_bag
 
-    frase = "Cedo ou tarde.de manhã,,,você.vai aprender, assim como eu aprendi, que há uma diferença entre conhecer o caminho e percorrer o caminho"
+    # frase = "Cedo ou tarde.de manhã,,,você.vai aprender, assim como eu aprendi, que há uma diferença entre conhecer o caminho e percorrer o caminho"
 
-    # frase = "areia areia areia no no olho do do do do furacão Em meio milhões"
+    frase = "areia areia areia no no olho do do do do furacão Em meio milhões"
 
     # frase = "c d f A A e b B i o u h t v z A f x h A"
+
+    import traceback
+    # import logging
 
     try:
 
@@ -70,9 +72,8 @@ def main():
 
             print(f"{occurrences['word']}: {occurrences['total']}")
 
-    except Exception as ex:
-
-        print("Error text_mining:", ex)
+    except Exception:
+        traceback.print_exc()
 
 
 if __name__ == "__main__":
