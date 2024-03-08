@@ -1,8 +1,12 @@
+import traceback
+# import logging
+
+
 def main():
 
     def text_mining(frase):
 
-        vowels = ['a', 'e', 'i', 'o', 'u']
+        # vowels = ['a', 'e', 'i', 'o', 'u']
 
         punctuation = ['.', ',', ';', ':', '!',
                        '?', '...', '“', '”', '(', ')', '—']
@@ -12,14 +16,7 @@ def main():
 
         def create_bag():
 
-            words = []
-
-            for w in frase.split():
-
-                # if w in vowels:
-                #     continue
-
-                words.append(w)
+            words = frase.split()
 
             def get_occurrences():
 
@@ -41,15 +38,15 @@ def main():
 
                 occurrences = list(map(count_words, set(words)))
 
-                result = []
+                word_dictionary = []
 
                 for score in occurrences:
 
                     for k, v in score.items():
-                        result.append({"word": k,
-                                       "total": v})
+                        word_dictionary.append({"word": k,
+                                                "total": v})
 
-                return sorted(result,
+                return sorted(word_dictionary,
                               key=lambda x: x["total"],
                               reverse=True)
 
@@ -62,9 +59,6 @@ def main():
     frase = "areia areia areia no no olho do do do do furacão Em meio milhões"
 
     # frase = "c d f A A e b B i o u h t v z A f x h A"
-
-    import traceback
-    # import logging
 
     try:
 
