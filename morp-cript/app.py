@@ -15,18 +15,10 @@ def main():
 
         def get_occurrences():
 
-            # occurrences = list(map(lambda x: {"word": x, "total": frase.split().count(x)},
-            #                        set(frase.split())))
+            words = {word: frase.split().count(word)
+                     for word in set(frase.split())}
 
-            # return sorted(occurrences, key=lambda x: x["total"], reverse=True)
-
-            # occurrences = list(map(lambda x: {x, frase.split().count(x)},
-            #                        set(frase.split())))
-
-            occurrences = {word: frase.split().count(word)
-                           for word in set(frase.split())}
-
-            return sorted(occurrences.items(), key=lambda x: x[1], reverse=True)
+            return sorted(words.items(), key=lambda x: x[1], reverse=True)
 
         return get_occurrences
 
@@ -38,8 +30,8 @@ def main():
 
     try:
 
-        for occurrences in text_mining(frase)():
-            print(occurrences)
+        for words in text_mining(frase)():
+            print(words)
 
     except Exception:
         traceback.print_exc()
