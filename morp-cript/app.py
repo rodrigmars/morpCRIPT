@@ -1,3 +1,4 @@
+import re
 import traceback
 # import logging
 
@@ -6,19 +7,14 @@ def main():
 
     def text_mining(frase: str):
 
-        punctuation = ['.', ',', ';', ':', '!',
-                       '?', '*', '\\', '/', '...',
-                       '“', '”', '(', ')', '—']
-
-        for p in punctuation:
-            frase = frase.replace(p, '\u0020')
+        words = re.sub(r'[^\w\s]', '\u0020', frase).split()
 
         def get_occurrences():
 
-            words = {word: frase.split().count(word)
-                     for word in set(frase.split())}
+            occurrences = {word: words.count(word)
+                           for word in set(words)}
 
-            return sorted(words.items(), key=lambda x: x[1], reverse=True)
+            return sorted(occurrences.items(), key=lambda w: w[1], reverse=True)
 
         return get_occurrences
 
@@ -31,6 +27,7 @@ def main():
     try:
 
         for words in text_mining(frase)():
+
             print(words)
 
     except Exception:
