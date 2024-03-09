@@ -34,3 +34,17 @@ pip install -r requirements.txt
 ```powershell
 pip freeze > requirements.txt
 ```
+
+## Executando o projeto
+
+*SO Windows*
+
+Obs: Necessário ativar o ambiente para o gerenciamento de bibliotecas e execução dos módulos
+
+```powershell
+.\env-morpcript\Scripts\activate
+```
+Módulo de exemplo para execução
+```powershell
+python .\morp-cript\app.py
+```
